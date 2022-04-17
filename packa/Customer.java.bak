@@ -1,0 +1,98 @@
+package packa;
+import java.util.*;
+
+
+public class Customer extends Admin implements GasDepo{		
+	
+	Scanner sc = new Scanner(System.in);
+	int id[]={01,02,03,04,05};
+	String name[]={"Arvind Kumar","Jai Shah","Meera Kumari","Akash Sing","Veer Patel"};
+	int reg[]=new int[id.length];
+	String order="yes";
+	String register;
+	int cylinder=0,ch=0;
+	Admin ad = new Admin();
+	
+	public Customer(){
+		System.out.println("***** Welcome to Relince Gas Private Limited *****\n");
+	}
+	
+	//================ First Time this Check will executed ===========================//
+	
+	public void check(){
+		
+		if(ad.totalcylinder<=id.length){
+			System.out.println("Not Sufficient Cylinders In GasDepo Import First...");
+			System.out.println("Only "+ad.totalcylinder+" cylinder  avalible ");
+			ad.addgas();
+		}
+		else{
+			System.out.println(ad.totalcylinder+" cylinder  avalible ");
+			booking(cylinder);
+		}
+	} 
+	
+	//================ If want then Multiple Time this Check will executed =================//
+	
+	public void check(int cylinder){
+		System.out.println("***** Welcome to Relince Gas Private Limited *****\n");
+		this.cylinder=cylinder;
+		
+		if(this.cylinder<=id.length){
+			System.out.println("Not Sufficient Cylinders Import First...");
+			System.out.println("Only "+this.cylinder+" cylinder  avalible ");
+			ad.addgas();
+		}
+		else{
+		    System.out.println(this.cylinder+" cylinder  avalible ");
+			booking(this.cylinder);
+		}
+	} 
+
+	//======================= Booking Method ===========================//
+
+	public void booking(int cylinder){
+		this.cylinder=cylinder;
+		System.out.println("If you want to register for cylinder then press yes \n");
+		
+		for(int i=0;i<id.length;i++){
+			
+			System.out.printf(" "+id[i]+"\t"+name[i]+"\t");
+			register = sc.next();
+
+			if(order.equals(register)){
+				reg[i]=id[i];
+				this.cylinder=this.cylinder-1;
+			System.out.printf(" "+name[i]+"\t"+"-->Sucessfully registered for cylinder\n");
+			}
+			else
+				System.out.printf(" "+name[i]+"\t"+"-->NOT Registered ...\n");
+				System.out.println();			
+		}
+	System.out.println("\n");
+	
+	delivery();
+	}
+	
+	//========================= Delivery Method ===========================//
+
+	
+	public void delivery(){
+
+		for(int i=0;i<reg.length;i++){
+			if(reg[i]!=0)
+			System.out.println("cylinder deliverd to "+reg[i]+" "+name[i]);
+		}
+		System.out.println(" TotalCylinder remain : "+this.cylinder);
+		System.out.println("\n********* If you want to reapeat again then press 1 ... \n");
+		ch=sc.nextInt();
+		if(ch==1)
+			check(this.cylinder);
+	}
+	
+	//=========================== Terminated =============================//
+
+}
+
+
+

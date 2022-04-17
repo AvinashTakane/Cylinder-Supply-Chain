@@ -1,0 +1,9 @@
+package packa;
+
+
+public interface GasDepo{
+	
+//	abstract void viewdepo();
+	abstract public void Addgas();
+//	abstract public void addcustomer();
+}
